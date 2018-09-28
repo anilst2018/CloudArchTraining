@@ -1,0 +1,103 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Project
+  description: Demo Microservice resource
+host: localhost
+basePath: /Project
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/projects/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+    get:
+      operationId: GET-project
+      summary: Get Project
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/project-input'
+    put:
+      operationId: PUT-project
+      summary: Update Project
+      tags:
+        - Projects
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/project-input'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/project-input'
+    delete:
+      operationId: DELETE-project
+      summary: Delete Project
+      tags:
+        - Projects
+      responses:
+        '204':
+          description: ''
+          schema:
+            type: object
+            properties:
+              Response:
+                type: string
+  /projects:
+    get:
+      operationId: LIST-projects
+      summary: List Projects
+      tags:
+        - Projects
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/project-input'
+    post:
+      operationId: POST-project
+      summary: Create Project
+      tags:
+        - Projects
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/project-input'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/project-input'
+definitions:
+  project-input:
+    title: Project Input
+    type: object
+    properties:
+      ID:
+        type: integer
+      ClientName:
+        type: string
+      Location:
+        type: string
+      Freelancers:
+        type: array
+        items:
+          type: integer
+    required:
+      - ID
